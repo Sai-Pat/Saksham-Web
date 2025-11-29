@@ -14,7 +14,7 @@ const Landing = () => {
             image: '/communities.jpg',
         },
         {
-            title: 'Simplified Services, Enhanced Experience',
+            title: 'Simplified Services, Enhanced Experience india',
             description: 'From applying for schemes to checking statuses, our platform makes interacting with government services straightforward and efficient.',
             image: '/happy.jpg',
         },
@@ -197,7 +197,7 @@ const Landing = () => {
                         </motion.button>
                     </div>
                 </section>
-                
+
                 {/* STATS SECTION */}
                 <section className="container mx-auto px-4 py-12">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -244,13 +244,13 @@ const Landing = () => {
                 <section className="container mx-auto px-4 py-12">
                     <h2 className="text-3xl font-bold text-primary-blue text-center mb-8">Services by States & UTs</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {[    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa',
-                              'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala',
-                              'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland',
-                              'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
-                              'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
-                              'Andaman & Nicobar', 'Chandigarh', 'Dadar & Nagar Haveli', 'Daman & Diu',
-                              'Delhi', 'Lakshadweep', 'Puducherry', 'Ladakh', 'Jammu & Kashmir'
+                        {['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa',
+                            'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala',
+                            'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland',
+                            'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
+                            'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+                            'Andaman & Nicobar', 'Chandigarh', 'Dadar & Nagar Haveli', 'Daman & Diu',
+                            'Delhi', 'Lakshadweep', 'Puducherry', 'Ladakh', 'Jammu & Kashmir'
                         ].map((state, index) => (
                             <motion.div
                                 key={state}
@@ -274,60 +274,60 @@ const Landing = () => {
                 <section className="container mx-auto px-4 py-12">
                     <h2 className="text-3xl font-bold text-primary-blue text-center mb-8">Benefits of Saksham</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[    {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8.25 15.75h7.5A2.25 2.25 0 0018 13.5V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v7.5a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                ),
-                                heading: 'Unified Platform',
-                                description: 'All government services, schemes, and information in one easy-to-access location.',
-                            },
-                            {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0118 0Z" />
-                                    </svg>
-                                ),
-                                heading: 'Secure Access',
-                                description: 'Robust security measures to protect your personal data and transactions.',
-                            },
-                            {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v.01M12 12v.01M12 18v.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM11.25 6a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 12a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 18a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z" />
-                                    </svg>
-                                ),
-                                heading: '24x7 Availability',
-                                description: 'Access government services anytime, anywhere, on any device.',
-                            },
-                            {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l-7.5-7.5m0 0l7.5-7.5M3 13.5h18" />
-                                    </svg>
-                                ),
-                                heading: 'Multi-language Support',
-                                description: 'Information and services available in various regional languages for wider reach.',
-                            },
-                            {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                ),
-                                heading: 'Real-time Updates',
-                                description: 'Stay informed with the latest notifications and updates on your applications and schemes.',
-                            },
-                            {
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 1 00-2 2v10a2 2 0 002 2m0-16a2 2 0 012 2v10a2 2 0 01-2 2m0 0h.01M12 12h.01" />
-                                    </svg>
-                                ),
-                                heading: 'Personalized Experience',
-                                description: 'Tailored content and recommendations based on your preferences and needs.',
-                            },
+                        {[{
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8.25 15.75h7.5A2.25 2.25 0 0018 13.5V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v7.5a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                            ),
+                            heading: 'Unified Platform',
+                            description: 'All government services, schemes, and information in one easy-to-access location.',
+                        },
+                        {
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0118 0Z" />
+                                </svg>
+                            ),
+                            heading: 'Secure Access',
+                            description: 'Robust security measures to protect your personal data and transactions.',
+                        },
+                        {
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v.01M12 12v.01M12 18v.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM11.25 6a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 12a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 18a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z" />
+                                </svg>
+                            ),
+                            heading: '24x7 Availability',
+                            description: 'Access government services anytime, anywhere, on any device.',
+                        },
+                        {
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l-7.5-7.5m0 0l7.5-7.5M3 13.5h18" />
+                                </svg>
+                            ),
+                            heading: 'Multi-language Support',
+                            description: 'Information and services available in various regional languages for wider reach.',
+                        },
+                        {
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            ),
+                            heading: 'Real-time Updates',
+                            description: 'Stay informed with the latest notifications and updates on your applications and schemes.',
+                        },
+                        {
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-blue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 1 00-2 2v10a2 2 0 002 2m0-16a2 2 0 012 2v10a2 2 0 01-2 2m0 0h.01M12 12h.01" />
+                                </svg>
+                            ),
+                            heading: 'Personalized Experience',
+                            description: 'Tailored content and recommendations based on your preferences and needs.',
+                        },
                         ].map((benefit, index) => (
                             <motion.div
                                 key={index}
@@ -349,71 +349,71 @@ const Landing = () => {
                 <section className="container mx-auto px-4 py-12">
                     <h2 className="text-3xl font-bold text-primary-blue text-center mb-8">Explore Services by Category</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {[    {
-                                name: 'Travel',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Utilities',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17H21l-9-13-9 13h11.337z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Education',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v8" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Transport',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Health',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0112 21a8.987 8.987 0 019-6.738V6.552a8.967 8.967 0 00-6-2.79Z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Finance',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Employment',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6H7.5a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 007.5 21h4.5m-10.5-6L2 17.25m0 0l2.25 2.25M2 17.25H4.5m0-6H7.5m-3-6L2 6.75m0 0l2.25-2.25M2 6.75H4.5m10.5-6h.008v.008H15V6h1.5zm1.5 6h.008v.008H18v-1.5H16.5m1.5-6h.008v.008H18V9h-1.5m1.5 6h.008v.008H18V18h-1.5m-4.5 3h.008v.008H13.5V19.5H12M12 21h.008v.008H12z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                name: 'Legal',
-                                icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 16.5l-6 6-6-6M12 3v12m0 0l6-6-6-6" />
-                                    </svg>
-                                ),
-                            },
+                        {[{
+                            name: 'Travel',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Utilities',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17H21l-9-13-9 13h11.337z" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Education',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v8" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Transport',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Health',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0112 21a8.987 8.987 0 019-6.738V6.552a8.967 8.967 0 00-6-2.79Z" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Finance',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Employment',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6H7.5a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 007.5 21h4.5m-10.5-6L2 17.25m0 0l2.25 2.25M2 17.25H4.5m0-6H7.5m-3-6L2 6.75m0 0l2.25-2.25M2 6.75H4.5m10.5-6h.008v.008H15V6h1.5zm1.5 6h.008v.008H18v-1.5H16.5m1.5-6h.008v.008H18V9h-1.5m1.5 6h.008v.008H18V18h-1.5m-4.5 3h.008v.008H13.5V19.5H12M12 21h.008v.008H12z" />
+                                </svg>
+                            ),
+                        },
+                        {
+                            name: 'Legal',
+                            icon: (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-blue mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 16.5l-6 6-6-6M12 3v12m0 0l6-6-6-6" />
+                                </svg>
+                            ),
+                        },
                         ].map((category, index) => (
                             <motion.div
                                 key={index}
@@ -491,7 +491,7 @@ const Landing = () => {
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.6, delay: 0.4 }}
-                                src="https://via.placeholder.com/300x600/0071CE/FFFFFF?text=App+Screen" 
+                                src="https://via.placeholder.com/300x600/0071CE/FFFFFF?text=App+Screen"
                                 alt="Phone Mockup with App Screen"
                                 className="max-h-80 md:max-h-96 object-contain"
                             />
@@ -540,13 +540,13 @@ const Landing = () => {
                         <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
                         <div className="flex space-x-4 mb-6">
                             <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Facebook">
-                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.655 9.182 8.438 9.873V14.808h-2.54V12h2.54V9.797c0-2.518 1.493-3.902 3.776-3.902 1.096 0 2.052.196 2.327.283v2.027h-1.22c-1.206 0-1.44.572-1.44 1.411V12h2.89l-.47 2.808h-2.42V21.873C18.345 21.182 22 17.016 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.655 9.182 8.438 9.873V14.808h-2.54V12h2.54V9.797c0-2.518 1.493-3.902 3.776-3.902 1.096 0 2.052.196 2.327.283v2.027h-1.22c-1.206 0-1.44.572-1.44 1.411V12h2.89l-.47 2.808h-2.42V21.873C18.345 21.182 22 17.016 22 12c0-5.523-4.477-10-10-10z" /></svg>
                             </a>
                             <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
-                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M22.46 6c-.843.373-1.751.624-2.703.743.967-.582 1.708-1.503 2.054-2.593-.905.535-1.916.924-2.997 1.134-.855-.908-2.072-1.474-3.414-1.474-2.571 0-4.664 2.093-4.664 4.664 0 .365.042.721.123 1.06C8.683 8.354 5.305 6.643 3.033 3.82c-.378.649-.595 1.399-.595 2.198 0 1.618.824 3.045 2.079 3.874-.764-.025-1.48-.234-2.105-.582v.06c0 2.269 1.611 4.153 3.749 4.582-.392.106-.806.162-1.235.162-.303 0-.598-.03-1.026-.098.6 1.86 2.333 3.215 4.381 3.253-1.603 1.253-3.623 2.001-5.818 2.001-.379 0-.75-.022-1.115-.065C3.313 20.354 5.647 21 8.1 21c9.721 0 15.011-8.05 15.011-15.011 0-.229-.004-.456-.015-.684z"/></svg>
+                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M22.46 6c-.843.373-1.751.624-2.703.743.967-.582 1.708-1.503 2.054-2.593-.905.535-1.916.924-2.997 1.134-.855-.908-2.072-1.474-3.414-1.474-2.571 0-4.664 2.093-4.664 4.664 0 .365.042.721.123 1.06C8.683 8.354 5.305 6.643 3.033 3.82c-.378.649-.595 1.399-.595 2.198 0 1.618.824 3.045 2.079 3.874-.764-.025-1.48-.234-2.105-.582v.06c0 2.269 1.611 4.153 3.749 4.582-.392.106-.806.162-1.235.162-.303 0-.598-.03-1.026-.098.6 1.86 2.333 3.215 4.381 3.253-1.603 1.253-3.623 2.001-5.818 2.001-.379 0-.75-.022-1.115-.065C3.313 20.354 5.647 21 8.1 21c9.721 0 15.011-8.05 15.011-15.011 0-.229-.004-.456-.015-.684z" /></svg>
                             </a>
                             <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
-                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M12 2.163c3.204 0 3.584.012 4.85.071 1.17.055 1.805.249 2.227.422.56.236.965.52 1.353.908.388.388.672.793.908 1.353.173.422.367 1.057.422 2.227.059 1.266.071 1.646.071 4.85s-.012 3.584-.071 4.85c-.055 1.17-.249 1.805-.422 2.227-.236.56-.52 0-.908 1.353-.388.388-.793.672-1.353.908-.422.173-1.057.367-2.227.422-1.266.059-1.646.071-4.85.071s-3.584-.012-4.85-.071c-1.17-.055-1.805-.249-2.227-.422-.56-.236-.965-.52-1.353-.908-.388-.388-.672-.793-.908-1.353-.173-.422-.367-1.057-.422-2.227-.059-1.266-.071-1.646-.071-4.85s.012-3.584.071-4.85c.055-1.17.249-1.805.422-2.227.236-.56.52-.965.908-1.353.388-.388.793-.672 1.353-.908.422-.173 1.057-.367 2.227-.422 1.266-.059 1.646-.071 4.85-.071zm0-2.163c-3.264 0-3.664.014-4.949.073-1.32.062-2.215.28-2.91.566-.757.303-1.365.748-1.979 1.362s-1.059 1.222-1.362 1.979c-.286.695-.504 1.59-.566 2.91-.059 1.285-.073 1.685-.073 4.949s.014 3.664.073 4.949c.062 1.32.28 2.215.566 2.91.303.757.748 1.365 1.362 1.979s1.222 1.059 1.979 1.362c.695.286 1.59.504 2.91.566 1.285.059 1.685.073 4.949.073s3.664-.014 4.949-.073c1.32-.062 2.215-.28 2.91-.566.757-.303 1.365-.748 1.979-1.362s1.059-1.222 1.362-1.979c.286-.695.504-1.59.566-2.91.059-1.285.073-1.685.073-4.949s-.014-3.664-.073-4.949c-.062-1.32-.28-2.215-.566-2.91-.303-.757-.748-1.365-1.362-1.979s-1.059-1.222-1.979-1.362c-.695-.286-1.59-.504-2.91-.566-1.285-.059-1.685-.073-4.949-.073zm0 3.654c2.484 0 4.5 2.016 4.5 4.5s-2.016 4.5-4.5 4.5-4.5-2.016-4.5-4.5 2.016-4.5 4.5-4.5zm0-2.163c-3.606 0-6.505 2.899-6.505 6.505s2.899 6.505 6.505 6.505 6.505-2.899 6.505-6.505-2.899-6.505-6.505-6.505zm6.574-.908c-.752 0-1.362.61-1.362 1.362s.61 1.362 1.362 1.362 1.362-.61 1.362-1.362-.61-1.362-1.362-1.362z"/></svg>
+                                <svg fill="currentColor" viewBox="0 0 24 24" className="h-6 w-6"><path d="M12 2.163c3.204 0 3.584.012 4.85.071 1.17.055 1.805.249 2.227.422.56.236.965.52 1.353.908.388.388.672.793.908 1.353.173.422.367 1.057.422 2.227.059 1.266.071 1.646.071 4.85s-.012 3.584-.071 4.85c-.055 1.17-.249 1.805-.422 2.227-.236.56-.52 0-.908 1.353-.388.388-.793.672-1.353.908-.422.173-1.057.367-2.227.422-1.266.059-1.646.071-4.85.071s-3.584-.012-4.85-.071c-1.17-.055-1.805-.249-2.227-.422-.56-.236-.965-.52-1.353-.908-.388-.388-.672-.793-.908-1.353-.173-.422-.367-1.057-.422-2.227-.059-1.266-.071-1.646-.071-4.85s.012-3.584.071-4.85c.055-1.17.249-1.805.422-2.227.236-.56.52-.965.908-1.353.388-.388.793-.672 1.353-.908.422-.173 1.057-.367 2.227-.422 1.266-.059 1.646-.071 4.85-.071zm0-2.163c-3.264 0-3.664.014-4.949.073-1.32.062-2.215.28-2.91.566-.757.303-1.365.748-1.979 1.362s-1.059 1.222-1.362 1.979c-.286.695-.504 1.59-.566 2.91-.059 1.285-.073 1.685-.073 4.949s.014 3.664.073 4.949c.062 1.32.28 2.215.566 2.91.303.757.748 1.365 1.362 1.979s1.222 1.059 1.979 1.362c.695.286 1.59.504 2.91.566 1.285.059 1.685.073 4.949.073s3.664-.014 4.949-.073c1.32-.062 2.215-.28 2.91-.566.757-.303 1.365-.748 1.979-1.362s1.059-1.222 1.362-1.979c.286-.695.504-1.59.566-2.91.059-1.285.073-1.685.073-4.949s-.014-3.664-.073-4.949c-.062-1.32-.28-2.215-.566-2.91-.303-.757-.748-1.365-1.362-1.979s-1.059-1.222-1.979-1.362c-.695-.286-1.59-.504-2.91-.566-1.285-.059-1.685-.073-4.949-.073zm0 3.654c2.484 0 4.5 2.016 4.5 4.5s-2.016 4.5-4.5 4.5-4.5-2.016-4.5-4.5 2.016-4.5 4.5-4.5zm0-2.163c-3.606 0-6.505 2.899-6.505 6.505s2.899 6.505 6.505 6.505 6.505-2.899 6.505-6.505-2.899-6.505-6.505-6.505zm6.574-.908c-.752 0-1.362.61-1.362 1.362s.61 1.362 1.362 1.362 1.362-.61 1.362-1.362-.61-1.362-1.362-1.362z" /></svg>
                             </a>
                         </div>
                         <p className="text-sm text-gray-400">&copy; 2024 Saksham. All rights reserved.</p>
