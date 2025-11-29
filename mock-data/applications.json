@@ -1,0 +1,42 @@
+[
+    {
+        "id": "APP-2023-001",
+        "applicantName": "Dustin Henderson",
+        "type": "Housing Scheme",
+        "status": "pending",
+        "submissionDate": "2023-10-15",
+        "location": "Village A, District X"
+    },
+    {
+        "id": "APP-2023-002",
+        "applicantName": "Jane Hopper",
+        "type": "Pension Scheme",
+        "status": "approved",
+        "submissionDate": "2023-10-12",
+        "location": "Village B, District X"
+    },
+    {
+        "id": "APP-2023-003",
+        "applicantName": "Max",
+        "type": "Agricultural Loan",
+        "status": "rejected",
+        "submissionDate": "2023-10-10",
+        "location": "Village C, District Y"
+    },
+    {
+        "id": "APP-2023-004",
+        "applicantName": "Lucas Sinclair",
+        "type": "Education Grant",
+        "status": "pending",
+        "submissionDate": "2023-10-18",
+        "location": "Village A, District X"
+    },
+    {
+        "id": "APP-2023-005",
+        "applicantName": "Will Buyers",
+        "type": "Housing Scheme",
+        "status": "pending",
+        "submissionDate": "2023-10-19",
+        "location": "Village D, District Z"
+    }
+]

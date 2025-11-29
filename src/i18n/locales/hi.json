@@ -1,0 +1,57 @@
+{
+    "app": {
+        "title": "अधिकारी डैशबोर्ड",
+        "greeting": "वापसी पर स्वागत है, {{name}}"
+    },
+    "kpis": {
+        "pending_reviews": "लंबित समीक्षाएं",
+        "field_visits": "क्षेत्रीय दौरे",
+        "beneficiaries": "लाभार्थी",
+        "efficiency": "दक्षता"
+    },
+    "actions": {
+        "verify_docs": "दस्तावेज़ सत्यापन",
+        "field_visit": "क्षेत्रीय दौरा",
+        "profiling": "प्रोफाइलिंग",
+        "check": "जांचें",
+        "approve": "स्वीकृत करें",
+        "reject": "अस्वीकार करें",
+        "schedule": "अनुसूची",
+        "upload_photo": "फोटो अपलोड करें",
+        "view_details": "विवरण देखें"
+    },
+    "table": {
+        "id": "आईडी",
+        "applicant": "आवेदक",
+        "type": "प्रकार",
+        "status": "स्थिति",
+        "date": "दिनांक",
+        "actions": "कार्रवाई"
+    },
+    "status": {
+        "pending": "लंबित",
+        "approved": "स्वीकृत",
+        "rejected": "अस्वीकृत",
+        "scheduled": "अनुसूचित",
+        "completed": "पूर्ण"
+    },
+    "dialog": {
+        "confirm_approve": "स्वीकृति की पुष्टि करें",
+        "confirm_reject": "अस्वीकृति की पुष्टि करें",
+        "approve_msg": "क्या आप सुनिश्चित हैं कि आप इस आवेदन को स्वीकृत करना चाहते हैं?",
+        "reject_msg": "क्या आप सुनिश्चित हैं कि आप इस आवेदन को अस्वीकार करना चाहते हैं?",
+        "cancel": "रद्द करें",
+        "confirm": "पुष्टि करें",
+        "schedule_visit": "क्षेत्रीय दौरा तय करें",
+        "select_enumerator": "प्रगणक चुनें",
+        "visit_date": "दौरे की तारीख",
+        "visit_time": "दौरे का समय",
+        "location": "स्थान"
+    },
+    "messages": {
+        "approved_success": "आवेदन सफलतापूर्वक स्वीकृत किया गया",
+        "rejected_success": "आवेदन अस्वीकार कर दिया गया",
+        "visit_scheduled": "दौरा सफलतापूर्वक तय किया गया",
+        "offline_queue": "ऑफलाइन कतार: {{count}} आइटम"
+    }
+}

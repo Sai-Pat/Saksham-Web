@@ -1,0 +1,80 @@
+{
+  "common": {
+    "name": "नाम",
+    "applicationId": "आवेदन आईडी",
+    "appliedOn": "आवेदन तिथि",
+    "state": "राज्य",
+    "status": "स्थिति",
+    "actions": "कार्रवाई",
+    "search": "खोजें...",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "save": "सहेजें",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि"
+  },
+  "dashboard": {
+    "welcome": "स्वागत है",
+    "subtitle": "पीएम-अजय जीआईए योजना डैशबोर्ड",
+    "pendingVerification": "लंबित सत्यापन",
+    "fieldVisits": "फील्ड विज़िट आवश्यक",
+    "totalApproved": "कुल स्वीकृत",
+    "automationRate": "स्वचालन दर",
+    "quickActions": "त्वरित कार्रवाई"
+  },
+  "verification": {
+    "title": "दस्तावेज़ सत्यापन",
+    "applicationDetails": "आवेदन विवरण",
+    "documents": "अपलोड किए गए दस्तावेज़",
+    "timeline": "आवेदन समयरेखा"
+  },
+  "fieldVisit": {
+    "title": "फील्ड विज़िट प्रबंधन",
+    "scheduleVisit": "यात्रा निर्धारित करें",
+    "uploadPhotos": "फोटो अपलोड करें",
+    "assignEnumerator": "गणनाकर्ता नियुक्त करें",
+    "visitCompleted": "यात्रा पूर्ण"
+  },
+  "analytics": {
+    "title": "लाभार्थी विश्लेषण और प्रोफाइलिंग",
+    "subtitle": "पीएम-अजय जीआईए योजना लाभार्थियों की व्यापक जानकारी",
+    "exportCSV": "CSV निर्यात करें",
+    "exportPDF": "PDF निर्यात करें",
+    "filters": "फिल्टर"
+  },
+  "actions": {
+    "check": "जांचें",
+    "approve": "स्वीकृत करें",
+    "reject": "अस्वीकृत करें",
+    "view": "देखें",
+    "download": "डाउनलोड करें",
+    "verifyDocuments": "दस्तावेज़ सत्यापित करें",
+    "scheduleVisit": "यात्रा निर्धारित करें",
+    "viewAnalytics": "विश्लेषण देखें",
+    "upload": "अपलोड करें",
+    "export": "निर्यात करें"
+  },
+  "filters": {
+    "allStatus": "सभी स्थिति",
+    "pending": "लंबित",
+    "approved": "स्वीकृत",
+    "rejected": "अस्वीकृत"
+  },
+  "timeline": {
+    "submitted": "आवेदन जमा किया गया",
+    "aiCheck": "एआई सत्यापन जांच",
+    "officerReview": "अधिकारी समीक्षा",
+    "fieldVisit": "फील्ड विज़िट",
+    "finalDecision": "अंतिम निर्णय"
+  },
+  "aiStatus": {
+    "verified": "एआई सत्यापित",
+    "flagged": "एआई फ्लैग किया गया",
+    "discrepancy": "एआई विसंगति"
+  },
+  "language": {
+    "english": "English",
+    "hindi": "हिन्दी",
+    "switch": "भाषा बदलें"
+  }
+}

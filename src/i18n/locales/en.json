@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "Officer Dashboard",
+    "greeting": "Welcome back, {{name}}"
+  },
+  "kpis": {
+    "pending_reviews": "Pending Reviews",
+    "field_visits": "Field Visits",
+    "beneficiaries": "Beneficiaries",
+    "efficiency": "Efficiency"
+  },
+  "actions": {
+    "verify_docs": "Verify Documents",
+    "field_visit": "Field Visit",
+    "profiling": "Profiling",
+    "check": "Check",
+    "approve": "Approve",
+    "reject": "Reject",
+    "schedule": "Schedule",
+    "upload_photo": "Upload Photo",
+    "view_details": "View Details"
+  },
+  "table": {
+    "id": "ID",
+    "applicant": "Applicant",
+    "type": "Type",
+    "status": "Status",
+    "date": "Date",
+    "actions": "Actions"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "scheduled": "Scheduled",
+    "completed": "Completed"
+  },
+  "dialog": {
+    "confirm_approve": "Confirm Approval",
+    "confirm_reject": "Confirm Rejection",
+    "approve_msg": "Are you sure you want to approve this application?",
+    "reject_msg": "Are you sure you want to reject this application?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "schedule_visit": "Schedule Field Visit",
+    "select_enumerator": "Select Enumerator",
+    "visit_date": "Visit Date",
+    "visit_time": "Visit Time",
+    "location": "Location"
+  },
+  "messages": {
+    "approved_success": "Application approved successfully",
+    "rejected_success": "Application rejected",
+    "visit_scheduled": "Visit scheduled successfully",
+    "offline_queue": "Offline Queue: {{count}} items"
+  }
+}

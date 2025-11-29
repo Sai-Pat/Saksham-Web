@@ -1,0 +1,161 @@
+@import './theme/typography.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------
+   Design tokens (map to Tailwind)
+   --------------------------- */
+:root{
+  /* Colors (map these to your tailwind.config.js values) */
+  --color-saffron: #FF9933;   /* saffron-500 */
+  --color-saffron-600: #EA580C;
+  --color-green: #138808;     /* green-500 */
+  --color-green-600: #15803D;
+  --color-navy: #002F6C;      /* navy-500 */
+
+  --color-white: #FFFFFF;
+  --color-glassWhite: rgba(255,255,255,0.08);
+  --color-glassDark: rgba(0,31,50,0.22);
+
+  /* Glass and border */
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255,255,255,0.06);
+
+  /* Typography */
+  --font-size-base: 14px;
+  --font-weight-normal: 400;
+  --line-height-normal: 1.45;
+
+  /* Motion / animation */
+  --gradient-duration: 15s;
+}
+
+/* ---------------------------
+   Global resets & body
+   --------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', 'Mukta', 'Noto Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-white);
+  min-height: 100vh;
+
+  /* subtle patriotic gradient base — not overpowering for text */
+  background: linear-gradient(135deg, rgba(0,47,108,0.95) 0%, rgba(255,153,51,0.06) 50%, rgba(19,136,8,0.04) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------
+   Glass effect utility
+   --------------------------- */
+.glass-effect {
+  background: var(--color-glassWhite);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 0.5rem; /* 8px */
+  border: var(--glass-border);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+  color: inherit;
+}
+
+/* Darker glass for panels on lighter backgrounds (or night-mode) */
+.glass-effect--dark {
+  background: var(--color-glassDark);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Small helper for translucent controls */
+.glass-control {
+  background: rgba(255,255,255,0.04);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ---------------------------
+   Patriotic animated gradient (use sparingly)
+   --------------------------- */
+.patriotic-gradient {
+  background: linear-gradient(45deg, var(--color-saffron), var(--color-white), var(--color-green));
+  background-size: 600% 600%;
+  animation: gradientShift var(--gradient-duration) ease infinite;
+}
+
+/* Reduce motion for users who opt out */
+@media (prefers-reduced-motion: reduce) {
+  .patriotic-gradient {
+    animation: none;
+    background-size: cover;
+  }
+}
+
+/* animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------------------------
+   Header watermark (Ashoka Chakra)
+   Use via <div class="chakra-watermark"> inside header
+   --------------------------- */
+.chakra-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0.06;
+}
+
+/* ---------------------------
+   Cards, KPIs, small utilities
+   --------------------------- */
+.kpi-card {
+  @apply p-4 rounded-xl; /* tailwind utility injection */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.kpi-accent {
+  width: 6px;
+  border-radius: 6px;
+}
+
+/* Small responsive helpers */
+@media (max-width: 768px) {
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* Accessibility focus */
+:focus {
+  outline: 3px solid rgba(255,153,51,0.22); /* saffron focus ring */
+  outline-offset: 2px;
+}
+
+/* ---------------------------
+   Performance notes (utility)
+   --------------------------- */
+/* Avoid heavy box-shadows on mobile to reduce repaint costs */
+@media (max-width: 640px) {
+  .glass-effect { box-shadow: 0 4px 12px rgba(2,6,23,0.06); }
+}

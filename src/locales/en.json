@@ -1,0 +1,80 @@
+{
+  "common": {
+    "name": "Name",
+    "applicationId": "Application ID",
+    "appliedOn": "Applied On",
+    "state": "State",
+    "status": "Status",
+    "actions": "Actions",
+    "search": "Search...",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "subtitle": "PM-AJAY GIA Scheme Dashboard",
+    "pendingVerification": "Pending Verification",
+    "fieldVisits": "Field Visits Required",
+    "totalApproved": "Total Approved",
+    "automationRate": "Automation Rate",
+    "quickActions": "Quick Actions"
+  },
+  "verification": {
+    "title": "Document Verification",
+    "applicationDetails": "Application Details",
+    "documents": "Uploaded Documents",
+    "timeline": "Application Timeline"
+  },
+  "fieldVisit": {
+    "title": "Field Visit Management",
+    "scheduleVisit": "Schedule Visit",
+    "uploadPhotos": "Upload Photos",
+    "assignEnumerator": "Assign Enumerator",
+    "visitCompleted": "Visit Completed"
+  },
+  "analytics": {
+    "title": "Beneficiary Analytics & Profiling",
+    "subtitle": "Comprehensive insights into PM-AJAY GIA scheme beneficiaries",
+    "exportCSV": "Export CSV",
+    "exportPDF": "Export PDF",
+    "filters": "Filters"
+  },
+  "actions": {
+    "check": "Check",
+    "approve": "Approve",
+    "reject": "Reject",
+    "view": "View",
+    "download": "Download",
+    "verifyDocuments": "Verify Documents",
+    "scheduleVisit": "Schedule Visit",
+    "viewAnalytics": "View Analytics",
+    "upload": "Upload",
+    "export": "Export"
+  },
+  "filters": {
+    "allStatus": "All Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "timeline": {
+    "submitted": "Application Submitted",
+    "aiCheck": "AI Verification Check",
+    "officerReview": "Officer Review",
+    "fieldVisit": "Field Visit",
+    "finalDecision": "Final Decision"
+  },
+  "aiStatus": {
+    "verified": "AI Verified",
+    "flagged": "AI Flagged",
+    "discrepancy": "AI Discrepancy"
+  },
+  "language": {
+    "english": "English",
+    "hindi": "हिन्दी",
+    "switch": "Switch Language"
+  }
+}
