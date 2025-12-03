@@ -1,0 +1,20 @@
+.glass-panel {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 47, 108, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glow-saffron {
+  box-shadow: 0 0 20px rgba(255, 153, 51, 0.15);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(19, 136, 8, 0.15);
+}

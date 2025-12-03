@@ -1,0 +1,31 @@
+.glass-card {
+  border-radius: 1rem;
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-card-default {
+  background: var(--color-glassWhite);
+}
+
+.glass-card-saffron {
+  background: var(--color-glassSaffron);
+  border-color: rgba(255, 153, 51, 0.3);
+}
+
+.glass-card-green {
+  background: var(--color-glassGreen);
+  border-color: rgba(19, 136, 8, 0.3);
+}
+
+.glass-card-navy {
+  background: var(--color-glassNavy);
+  border-color: rgba(0, 47, 108, 0.3);
+}

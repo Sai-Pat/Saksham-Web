@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ------------------------------------
+    // CITIZENS COLLECTION + DOCUMENTS SUBCOLLECTION
+    // ------------------------------------
+    match /citizens/{aadhaarId} {
+      // Create only if user creates their own record
+      allow create: if request.auth != null 
+                    && request.resource.data.uid == request.auth.uid;
+      // No updates allowed to citizen profile root
+      allow update: if false;
+      // Read allowed to owner OR any authenticated user (for officers)
+      allow read: if request.auth != null;
+      
+      // Subcollection: documents (Aadhaar, PAN, etc.)
+      match /documents/{documentId} {
+        // MODIFIED: Allow read/write for authenticated users so Officers can update status
+        allow read, write: if request.auth != null;
+      }
+
+      // ------------------------------------
+      // NOTIFICATIONS SUBCOLLECTION (NEW)
+      // ------------------------------------
+      match /notifications/{notificationId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+    // ------------------------------------
+    // OFFICERS COLLECTION (login only)
+    // ------------------------------------
+    match /officers/{officerEmail} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    // ------------------------------------
+    // ADMIN COLLECTION (login only)
+    // ------------------------------------
+    match /admin/{adminEmail} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    // ------------------------------------
+    // SCHEMES DATA
+    // ------------------------------------
+    match /data/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+    // ------------------------------------
+    // SOCIAL FEED (Added for Saksham Social)
+    // ------------------------------------
+    match /social/{postId} {
+      // Allow read for authenticated users
+      allow read: if request.auth != null;
+      
+      // Allow create/update if authenticated (users can post/like)
+      allow write: if request.auth != null;
+      // Comments subcollection
+      match /comments/{commentId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+    // ------------------------------------
+    // GLOBAL DEFAULT DENY
+    // ------------------------------------
+    match /{documentId=**} {
+      allow read, write: if false;
+    }
+  }
+}
