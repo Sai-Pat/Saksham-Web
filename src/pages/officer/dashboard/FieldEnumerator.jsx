@@ -3,7 +3,42 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import { useOfflineQueue } from '../../../hooks/useOfflineQueue';
-import { scheduleVisit, getApplications, approveApplication } from '../../../api/applications';
+import { getApplications, approveApplication } from '../../../api/applications';
+import { db } from '../../../firebase/client';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix for default marker icon
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
+
+const LocationMarker = ({ position, setPosition }) => {
+    const map = useMapEvents({
+        click(e) {
+            setPosition(e.latlng.lat, e.latlng.lng);
+        },
+    });
+
+    return position === null ? null : (
+        <Marker position={position}></Marker>
+    );
+};
+
+const MapUpdater = ({ center }) => {
+    const map = useMap();
+    useEffect(() => {
+        if (center) {
+            map.flyTo(center, map.getZoom());
+        }
+    }, [center, map]);
+    return null;
+};
 
 const FieldEnumerator = () => {
     const { t } = useTranslation();
@@ -19,8 +54,47 @@ const FieldEnumerator = () => {
         date: '',
         time: '',
         enumeratorName: '',
+        officerName: '', // Added officerName
         registrationNo: '',
+        latitude: '',
+        longitude: '',
     });
+
+    const getPosition = () => {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+                reject(new Error("Geolocation is not supported by this browser."));
+            } else {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            }
+        });
+    };
+
+    const fetchCoordinates = async () => {
+        if (!scheduleData.place) {
+            alert("Please enter a location first.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(scheduleData.place)}`);
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                const { lat, lon } = data[0];
+                setScheduleData(prev => ({
+                    ...prev,
+                    latitude: parseFloat(lat).toFixed(6),
+                    longitude: parseFloat(lon).toFixed(6)
+                }));
+            } else {
+                alert("Location not found. Please try a more specific address.");
+            }
+        } catch (error) {
+            console.error("Error fetching coordinates:", error);
+            alert("Failed to fetch coordinates. Please enter manually.");
+        }
+    };
 
     useEffect(() => {
         loadApplications();
@@ -69,28 +143,58 @@ const FieldEnumerator = () => {
     };
 
     const handleScheduleSubmit = async () => {
-        if (!selectedApp || !scheduleData.place || !scheduleData.date || !scheduleData.time || !scheduleData.enumeratorName || !scheduleData.registrationNo) {
-            alert('Please fill in all fields');
+        if (!selectedApp || !scheduleData.place || !scheduleData.date || !scheduleData.time || !scheduleData.enumeratorName || !scheduleData.registrationNo || !scheduleData.officerName) {
+            alert('Please fill in all required fields');
             return;
         }
 
-        const location = scheduleData.place;
-        const locPrefix = location.substring(0, 3).toUpperCase();
-        const timestamp = Date.now();
-        const uniqueHash = `${locPrefix}${timestamp}`;
+        try {
+            // Use fetched/entered lat/long, or try to get current if empty (optional fallback)
+            let { latitude, longitude } = scheduleData;
 
-        await scheduleVisit({
-            applicationId: selectedApp.id,
-            ...scheduleData,
-            visitId: uniqueHash
-        });
-        alert(`Field visit scheduled for ${selectedApp.applicantName}. Visit ID: ${uniqueHash}`);
-        
-        setApplications(applications.map(app =>
-            app.id === selectedApp.id ? { ...app, visitId: uniqueHash, scheduled: true } : app
-        ));
+            if (!latitude || !longitude) {
+                const proceed = window.confirm("Coordinates are missing. Do you want to proceed without them?");
+                if (!proceed) return;
+            }
 
-        handleCloseModal();
+            const location = scheduleData.place;
+            const locPrefix = location.substring(0, 3).toUpperCase();
+            const timestamp = Date.now();
+            const uniqueHash = `${locPrefix}${timestamp}`;
+
+            const payload = {
+                applicationId: selectedApp.id,
+                applicantName: selectedApp.applicantName,
+                visitId: uniqueHash,
+                enumeratorName: scheduleData.enumeratorName,
+                officerName: scheduleData.officerName,
+                registrationNo: scheduleData.registrationNo,
+                place: scheduleData.place,
+                latitude: latitude,
+                longitude: longitude,
+                date: scheduleData.date,
+                time: scheduleData.time,
+                status: 'SCHEDULED',
+                createdAt: serverTimestamp(),
+                createdBy: 'OFFICER'
+            };
+
+            // Save to Firestore
+            await addDoc(collection(db, 'field_enumerators'), payload);
+
+            alert(`Field visit scheduled for ${selectedApp.applicantName}.\nVisit ID: ${uniqueHash}\nLocation: ${latitude}, ${longitude}`);
+
+            // Update local state
+            setApplications(applications.map(app =>
+                app.id === selectedApp.id ? { ...app, visitId: uniqueHash, scheduled: true } : app
+            ));
+
+            handleCloseModal();
+
+        } catch (error) {
+            console.error("Error scheduling visit:", error);
+            alert("Failed to schedule visit: " + error.message);
+        }
     };
 
     const handleApprove = async () => {
@@ -100,7 +204,6 @@ const FieldEnumerator = () => {
         handleCloseModal();
         loadApplications();
     };
-
 
     const handleSync = async () => {
         await sync();
@@ -255,6 +358,18 @@ const FieldEnumerator = () => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Officer Name <span className="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={scheduleData.officerName}
+                                            onChange={(e) => setScheduleData({ ...scheduleData, officerName: e.target.value })}
+                                            placeholder="Enter officer name"
+                                            className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
                                             Registration No. <span className="text-red-500">*</span>
                                         </label>
                                         <input
@@ -265,6 +380,7 @@ const FieldEnumerator = () => {
                                             className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         />
                                     </div>
+
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">
                                             Visit Location <span className="text-red-500">*</span>
@@ -273,10 +389,72 @@ const FieldEnumerator = () => {
                                             type="text"
                                             value={scheduleData.place}
                                             onChange={(e) => setScheduleData({ ...scheduleData, place: e.target.value })}
-                                            placeholder="Enter address"
-                                            className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="Enter address or select on map"
+                                            className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-2"
                                         />
+
+                                        <div className="h-64 w-full rounded-md overflow-hidden border border-gray-300 mb-4 relative z-0">
+                                            <MapContainer
+                                                center={[20.5937, 78.9629]}
+                                                zoom={5}
+                                                style={{ height: '100%', width: '100%' }}
+                                            >
+                                                <TileLayer
+                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                                />
+                                                <LocationMarker
+                                                    position={scheduleData.latitude && scheduleData.longitude ? [scheduleData.latitude, scheduleData.longitude] : null}
+                                                    setPosition={(lat, lng) => {
+                                                        setScheduleData(prev => ({
+                                                            ...prev,
+                                                            latitude: lat.toFixed(6),
+                                                            longitude: lng.toFixed(6)
+                                                        }));
+                                                        // Reverse geocode
+                                                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                                                            .then(res => res.json())
+                                                            .then(data => {
+                                                                if (data && data.display_name) {
+                                                                    setScheduleData(prev => ({
+                                                                        ...prev,
+                                                                        place: data.display_name
+                                                                    }));
+                                                                }
+                                                            })
+                                                            .catch(err => console.error("Reverse geocoding failed", err));
+                                                    }}
+                                                />
+                                                <MapUpdater center={scheduleData.latitude && scheduleData.longitude ? [scheduleData.latitude, scheduleData.longitude] : null} />
+                                            </MapContainer>
+                                        </div>
                                     </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Latitude
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={scheduleData.latitude}
+                                                readOnly
+                                                className="w-full p-2.5 border border-gray-300 rounded-md bg-gray-100 text-gray-500 cursor-not-allowed"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Longitude
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={scheduleData.longitude}
+                                                readOnly
+                                                className="w-full p-2.5 border border-gray-300 rounded-md bg-gray-100 text-gray-500 cursor-not-allowed"
+                                            />
+                                        </div>
+                                    </div>
+
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -320,74 +498,96 @@ const FieldEnumerator = () => {
                         </div>
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* View Modal */}
-            {modalType === 'view' && selectedApp && (
-                 <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                 <div className="flex min-h-full items-center justify-center p-4">
-                     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onClick={handleCloseModal}></div>
-                     <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:w-full sm:max-w-lg">
-                         <div className="bg-govt-blue-dark px-6 py-4">
-                             <h3 className="text-lg font-bold text-white">View Details</h3>
-                         </div>
-                         <div className="px-6 py-6">
-                            <p>Viewing details for application: {selectedApp.id}</p>
-                         </div>
-                         <div className="bg-gray-50 px-6 py-4 flex gap-3 justify-end">
-                             <button
-                                 onClick={handleCloseModal}
-                                 className="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded hover:bg-gray-50 transition-colors"
-                             >
-                                 Close
-                             </button>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-            )}
-
-            {/* Approve Confirmation Modal */}
-            {modalType === 'approve' && selectedApp && (
-                <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div className="flex min-h-full items-center justify-center p-4">
-                        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onClick={handleCloseModal}></div>
-                        <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:w-full sm:max-w-lg">
-                            <div className="bg-green-600 px-6 py-4">
-                                <h3 className="text-lg font-bold text-white">Approve After Field Visit</h3>
-                            </div>
-                            <div className="px-6 py-6">
-                                <p className="text-gray-700 mb-4">
-                                    Are you sure you want to approve the application for <span className="font-bold">{selectedApp.applicantName}</span>?
-                                </p>
-                                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-                                    <p className="text-sm font-bold text-yellow-800 mb-1">Checklist:</p>
-                                    <ul className="list-disc list-inside text-sm text-yellow-700">
-                                        <li>Field visit completed</li>
-                                        <li>Documents verified physically</li>
-                                        <li>Photos uploaded</li>
-                                    </ul>
+            {
+                modalType === 'view' && selectedApp && (
+                    <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div className="flex min-h-full items-center justify-center p-4">
+                            <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onClick={handleCloseModal}></div>
+                            <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:w-full sm:max-w-lg">
+                                <div className="bg-govt-blue-dark px-6 py-4">
+                                    <h3 className="text-lg font-bold text-white">View Details</h3>
                                 </div>
-                            </div>
-                            <div className="bg-gray-50 px-6 py-4 flex gap-3 justify-end">
-                                <button
-                                    onClick={handleCloseModal}
-                                    className="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded hover:bg-gray-50 transition-colors"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={handleApprove}
-                                    className="px-4 py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition-colors shadow-sm"
-                                >
-                                    Confirm Approve
-                                </button>
+                                <div className="px-6 py-6">
+                                    <p className="mb-4">Viewing details for application: <span className="font-semibold">{selectedApp.id}</span></p>
+
+                                    <div className="border rounded-lg p-4 bg-gray-50 flex flex-col items-center justify-center min-h-[200px]">
+                                        {selectedApp.photoUrl ? (
+                                            <img
+                                                src={selectedApp.photoUrl}
+                                                alt="Applicant"
+                                                className="max-w-full max-h-64 object-contain rounded-md shadow-sm"
+                                            />
+                                        ) : (
+                                            <div className="text-center text-gray-500">
+                                                <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <p className="mt-2 text-sm font-medium">Photo not available now</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="bg-gray-50 px-6 py-4 flex gap-3 justify-end">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        className="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded hover:bg-gray-50 transition-colors"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+
+            {/* Approve Confirmation Modal */}
+            {
+                modalType === 'approve' && selectedApp && (
+                    <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div className="flex min-h-full items-center justify-center p-4">
+                            <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onClick={handleCloseModal}></div>
+                            <div className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:w-full sm:max-w-lg">
+                                <div className="bg-green-600 px-6 py-4">
+                                    <h3 className="text-lg font-bold text-white">Approve After Field Visit</h3>
+                                </div>
+                                <div className="px-6 py-6">
+                                    <p className="text-gray-700 mb-4">
+                                        Are you sure you want to approve the application for <span className="font-bold">{selectedApp.applicantName}</span>?
+                                    </p>
+                                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                                        <p className="text-sm font-bold text-yellow-800 mb-1">Checklist:</p>
+                                        <ul className="list-disc list-inside text-sm text-yellow-700">
+                                            <li>Field visit completed</li>
+                                            <li>Documents verified physically</li>
+                                            <li>Photos uploaded</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-50 px-6 py-4 flex gap-3 justify-end">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        className="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded hover:bg-gray-50 transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={handleApprove}
+                                        className="px-4 py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition-colors shadow-sm"
+                                    >
+                                        Confirm Approve
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        </div >
     );
 };
 
