@@ -7,9 +7,27 @@ const Landing = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [showLoginDropdown, setShowLoginDropdown] = useState(false);
     const [showStatesModal, setShowStatesModal] = useState(false);
+    const [showSchemeModal, setShowSchemeModal] = useState(false);
+    const [selectedState, setSelectedState] = useState(null);
     const [whoWithUsSlide, setWhoWithUsSlide] = useState(0);
     const [ourServicesSlide, setOurServicesSlide] = useState(0);
     const { t, i18n } = useTranslation();
+
+    const stateSchemes = {
+        delhi: [
+            { name: 'landing.stateSchemes.delhi.1.name', description: 'landing.stateSchemes.delhi.1.desc' },
+            { name: 'landing.stateSchemes.delhi.2.name', description: 'landing.stateSchemes.delhi.2.desc' },
+        ],
+        gujarat: [
+            { name: 'landing.stateSchemes.gujarat.1.name', description: 'landing.stateSchemes.gujarat.1.desc' },
+        ],
+        haryana: [
+            { name: 'landing.stateSchemes.haryana.1.name', description: 'landing.stateSchemes.haryana.1.desc' },
+        ],
+        maharashtra: [
+            { name: 'landing.stateSchemes.maharashtra.1.name', description: 'landing.stateSchemes.maharashtra.1.desc' },
+        ],
+    };
 
     const slides = [
         {
@@ -124,6 +142,11 @@ const Landing = () => {
         i18n.changeLanguage(lng);
     };
 
+    const handleStateClick = (state) => {
+        setSelectedState(state);
+        setShowSchemeModal(true);
+    };
+
     return (
         <div className="min-h-screen bg-hero-gradient font-sans text-dark-text">
             {/* Top Dark Blue Bar */}
@@ -167,21 +190,20 @@ const Landing = () => {
                         {t('landing.saksham')}
                     </div>
                 </div>
-                <nav className="flex items-center text-dark-text font-bold text-lg ml-auto space-x-8">
-                    <Link to="/" className="hover:text-primary-blue">{t('landing.home')}</Link>
-                    <Link to="/services" className="hover:text-primary-blue">{t('landing.services')}</Link>
-                    <Link to="/schemes" className="hover:text-primary-blue">{t('landing.schemes')}</Link>
-                    <Link to="/digilocker" className="hover:text-primary-blue">{t('landing.digilocker')}</Link>
-                    <a href="https://heatmap-jade.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-blue">{t('landing.heatmap')}</a>
-                    <Link to="/dashboard" className="hover:text-primary-blue">{t('landing.dashboard')}</Link>
-                    {/* Search Icon */}
-                    <button className="text-dark-text hover:text-primary-blue">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </button>
-                </nav>
-                <div className="flex items-center space-x-4 ml-8">
+                <div className="flex items-center space-x-8 ml-auto">
+                    <nav className="flex items-center text-dark-text font-bold text-lg space-x-8">
+                        <Link to="/" className="hover:text-primary-blue">{t('landing.home')}</Link>
+                        <Link to="/services" className="hover:text-primary-blue">{t('landing.services')}</Link>
+                        <a href="#schemes-section" className="hover:text-primary-blue cursor-pointer">{t('landing.schemes')}</a>
+                        <Link to="/digilocker" className="hover:text-primary-blue">{t('landing.digilocker')}</Link>
+                        <a href="https://heatmap-jade.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-blue">{t('landing.heatmap')}</a>
+                        {/* Search Icon */}
+                        <button className="text-dark-text hover:text-primary-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </button>
+                    </nav>
                     {/* Login Button with Dropdown */}
                     <div className="relative">
                         <button
@@ -206,15 +228,6 @@ const Landing = () => {
                                 >
                                     {t('landing.officerLogin')}
                                 </Link>
-                                <a
-                                    href="https://citizen-web-pmajay.vercel.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    onClick={() => setShowLoginDropdown(false)}
-                                >
-                                    Citizen Login
-                                </a>
                             </div>
                         )}
                     </div>
@@ -494,28 +507,28 @@ const Landing = () => {
                     </div>
                 </section>
 
-                {/* SERVICES BY STATES SECTION */}
-                <section className="w-full bg-white py-12">
+                {/* SCHEMES BY STATES SECTION */}
+                <section id="schemes-section" className="w-full bg-white py-12">
                     <div className="max-w-7xl ml-auto px-4 pr-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                         {/* Left Column: Staggered Cards */}
                         <div className="bg-[#e9f1f8] p-6 rounded-[24px] flex flex-col items-center justify-center w-[512px] h-[472px] -mt-12">
                             <div className="grid grid-cols-2 gap-6">
-                                <div className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
+                                <div onClick={() => handleStateClick('delhi')} className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
                                     <div className="w-40 h-40 rounded-full bg-[#e0f2fe] flex items-center justify-center mb-2 group-hover:bg-white transition-all duration-300">
                                         <img src="/delhi.png" alt="Delhi" className="h-30 w-30 object-contain" />
                                     </div>
                                 </div>
-                                <div className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 mt-8 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
+                                <div onClick={() => handleStateClick('gujarat')} className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 mt-8 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
                                     <div className="w-40 h-40 rounded-full bg-[#e0f2fe] flex items-center justify-center mb-2 group-hover:bg-white transition-all duration-300">
                                         <img src="/gujarat.png" alt="Gujarat" className="h-30 w-30 object-contain" />
                                     </div>
                                 </div>
-                                <div className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
+                                <div onClick={() => handleStateClick('haryana')} className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
                                     <div className="w-40 h-40 rounded-full bg-[#e0f2fe] flex items-center justify-center mb-2 group-hover:bg-white transition-all duration-300">
                                         <img src="/haryana.png" alt="Haryana" className="h-30 w-30 object-contain" />
                                     </div>
                                 </div>
-                                <div className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 mt-8 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
+                                <div onClick={() => handleStateClick('maharashtra')} className="w-[220px] h-[200px] bg-white rounded-xl shadow-md border border-[#edf2f7] flex flex-col items-center justify-center p-4 mt-8 cursor-pointer transition-all duration-300 hover:bg-primary-blue group">
                                     <div className="w-40 h-40 rounded-full bg-[#e0f2fe] flex items-center justify-center mb-2 group-hover:bg-white transition-all duration-300">
                                         <img src="/maharashtra.png" alt="Maharashtra" className="h-30 w-30 object-contain" />
                                     </div>
@@ -525,9 +538,9 @@ const Landing = () => {
 
                         {/* Right Column: Text and Button */}
                         <div className="flex flex-col justify-center lg:items-start items-center text-center lg:text-left">
-                            <h2 className="text-4xl font-bold text-[#0b3b70] leading-tight mb-4">{t('landing.servicesByStates')}</h2>
+                            <h2 className="text-4xl font-bold text-[#0b3b70] leading-tight mb-4">{t('landing.schemesByStates')}</h2>
                             <p className="text-lg text-gray-600 mb-6">
-                                {t('landing.exploreServices')}
+                                {t('landing.exploreSchemes')}
                             </p>
                             <button
                                 onClick={() => setShowStatesModal(true)}
@@ -555,38 +568,38 @@ const Landing = () => {
                                     {
                                         icon: (
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#055a8f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8.25 15.75h7.5A2.25 2.25 0 0018 13.5V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v7.5a2.25 2.25 0 002.25 2.25z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
                                             </svg>
                                         ),
-                                        title: t('landing.unifiedPlatform'),
-                                        tags: [t('landing.oneStopAccess'), t('landing.allServices'), t('landing.easyNavigation')]
+                                        title: t('landing.allSchemesOnePlace'),
+                                        tags: [t('landing.centralGovernment'), t('landing.stateGovernment'), t('landing.schemesTag')]
                                     },
                                     {
                                         icon: (
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#055a8f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0118 0Z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.488 1.107 1.488 2.09 0 1.077-.71 1.954-1.7 2.39m-9.75-5.167c-.884.284-1.488 1.107-1.488 2.09 0 1.077.71 1.954 1.7 2.39m9.75-5.167c0-.885-.356-1.676-.93-2.25m-9.75 7.5c.884.284 1.488 1.107 1.488 2.09 0 1.077-.71 1.954-1.7 2.39m9.75-5.167c0-.885-.356-1.676-.93-2.25m-9.75 7.5c.884.284 1.488 1.107 1.488 2.09 0 1.077-.71 1.954-1.7 2.39M12 12.75h.008v.008H12v-.008z" />
                                             </svg>
                                         ),
-                                        title: t('landing.secureAccess'),
-                                        tags: [t('landing.dataPrivacy'), t('landing.encrypted'), t('landing.safeTransactions')]
+                                        title: t('landing.allEngagementsOnePlace'),
+                                        tags: [t('landing.feedbackRating'), t('landing.notifications'), t('landing.customerSupport'), t('landing.aiBot')]
                                     },
                                     {
                                         icon: (
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#055a8f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v.01M12 12v.01M12 18v.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM11.25 6a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 12a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM11.25 18a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                                             </svg>
                                         ),
-                                        title: t('landing.availability'),
-                                        tags: [t('landing.anytime'), t('landing.anywhere'), t('landing.mobileReady')]
+                                        title: t('landing.allTransactionsOnePlace'),
+                                        tags: [t('landing.status'), t('landing.bills'), t('landing.applications'), t('landing.manyMore')]
                                     },
                                     {
                                         icon: (
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#055a8f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l-7.5-7.5m0 0l7.5-7.5M3 13.5h18" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
                                         ),
-                                        title: t('landing.multiLanguage'),
-                                        tags: [t('landing.regionalSupport'), t('landing.inclusive'), t('landing.accessible')]
+                                        title: t('landing.supportsEveryone'),
+                                        tags: [t('landing.mobileAccess'), t('landing.webAccess')]
                                     }
                                 ].map((card, index) => (
                                     <motion.div
@@ -777,6 +790,33 @@ const Landing = () => {
                 </section>
 
             </main>
+
+            {/* SCHEME MODAL */}
+            {showSchemeModal && selectedState && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowSchemeModal(false)}>
+                    <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto p-8" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-3xl font-bold text-primary-blue">{t('landing.schemesFor')} {selectedState.charAt(0).toUpperCase() + selectedState.slice(1)}</h2>
+                            <button
+                                onClick={() => setShowSchemeModal(false)}
+                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="space-y-4">
+                            {stateSchemes[selectedState].map((scheme, index) => (
+                                <div key={index} className="bg-light-blue-accent p-4 rounded-lg">
+                                    <h3 className="font-bold text-lg text-dark-text">{t(scheme.name)}</h3>
+                                    <p className="text-medium-text">{t(scheme.description)}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* STATES MODAL */}
             {showStatesModal && (
